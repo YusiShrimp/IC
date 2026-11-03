@@ -1,0 +1,6 @@
+# Everything here is already in the module's mpm2026 environment.
+numpy
+scipy
+matplotlib
+pytest
+flake8
