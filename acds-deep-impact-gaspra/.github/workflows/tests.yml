@@ -1,0 +1,33 @@
+name: run-tests
+on:
+  push:
+  pull_request:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+          cache: pip
+
+      - name: Cache downloaded data
+        uses: actions/cache@v4
+        with:
+          path: resources/ # wherever download_data.py saves files
+          key: data-${{ hashFiles('download_data.py') }}
+
+      - name: Package and data setup
+        run: |
+          pip install -e .
+          python download_data.py
+
+      - name: Run tests
+        run: pytest tests/ --timeout=120
+
+      - name: Build documentation
+        run: sphinx-build -W -b html docs docs/_build/html

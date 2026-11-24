@@ -1,0 +1,9 @@
+deepimpact.egg-info
+damage_map.html
+.eggs/
+.gitignore.swp
+build/
+__pycache__
+.ipynb_checkpoints/
+.pytest_cache/
+.vscode/
